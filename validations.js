@@ -1,108 +1,150 @@
-//keyup" means that the code runs every time the user releases a key while typing in the username field.
 let username = document.getElementById('userName');
 let password = document.getElementById('password');
 let isUsernameAvailable = false; // Track username availability
 let confirmPass = document.getElementById('confirmPassword');
 let fileInput = document.getElementById('fileInput'); // Assuming the file input has an id of 'fileInput'
+// showBootstrapAlert("usernameAlert", "Username is already taken, try another one");
+
+
+
 
 
 username.onkeyup = function () {
-    var user = username.value.trim();
-    var statusMessage = document.getElementById("username_status");
+    const user = username.value.trim();
 
     if (user === "") {
-        statusMessage.innerHTML = "";
+        showBootstrapAlert("usernameAlert", "Username cannot be empty");
         isUsernameAvailable = false;
         return;
     }
 
     if (user.length >= 3) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "index.php", true); // Now requests index.php directly
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "index.php", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 if (xhr.responseText === "taken") {
-                    statusMessage.innerHTML = "<span class='text-danger'>Username already taken , try another user name</span>";
+                    showBootstrapAlert("usernameAlert", "Username is already taken, try another one");
                     isUsernameAvailable = false;
                 } else {
-                    statusMessage.innerHTML = "<span class='text-success'>Username available </span>";
+                    hideBootstrapAlert("usernameAlert");
                     isUsernameAvailable = true;
                 }
             }
-        }
-    };
-    //Sends the username to index.php in a URL-encoded format (username=somevalue).
-    xhr.send("username=" + encodeURIComponent(user));
-};
-
-let nameLength = document.createElement("p");
-nameLength.textContent = "username must be at least 3 characters long";
-nameLength.style.fontSize = "15px";
-nameLength.style.color = "red";
-nameLength.style.margin = "0";
-
-username.onblur = function () {
-    if (this.value.length < 3) {
-        username.parentNode.insertBefore(nameLength, username.nextSibling.nextSibling);
+        };
+        hideBootstrapAlert("usernameAlert");
+        xhr.send("username=" + encodeURIComponent(user));
+    } else {
+        showBootstrapAlert("usernameAlert", "Username must be at least 3 characters long");
+        isUsernameAvailable = false;
         this.focus();
         return false;
     }
-    if (username.nextSibling.nextSibling.tagName == "P") {
-        username.nextSibling.nextSibling.remove();
-
-    }
-
-    if (!isUsernameAvailable) {
-        username.focus(); // Force user to stay in username field
-        return false;
-    }
 };
 
-let passlength = document.createElement("P");
-passlength.textContent = "Password must be at least 8 characters long, contain at least one number, and one special character (e.g., @, #, $, etc.).";
-passlength.style.fontSize = "15px";
-passlength.style.color = "red";
-passlength.style.margin = "0";
 
 const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
 
 password.onblur = function () {
     if (!passwordRegex.test(this.value)) {
         // Show error message
-        if (!password.nextElementSibling || password.nextElementSibling.tagName !== "P") {
-            password.parentNode.insertBefore(passlength, password.nextSibling.nextSibling);
-        }
-        this.focus();
+        showBootstrapAlert("passwordAlert", "Password must be at least 8 characters long, contain at least one number, and one special character.");
+
+        // this.focus();
         return false;
     }
 
-    // Remove error message if valid
-    if (password.nextElementSibling && password.nextElementSibling.tagName === "P") {
-        password.nextElementSibling.remove();
-    }
+    hideBootstrapAlert("passwordAlert");
 };
 
-let confirmed = document.createElement("P");
-confirmed.textContent = "Passwords do not match , try again";
-confirmed.style.fontSize = "15px";
-confirmed.style.color = "red";
-confirmed.style.margin = "0";
 
 confirmPass.onblur = function () {
     if (this.value != password.value) {
-        confirmPass.parentNode.insertBefore(confirmed, confirmPass.nextSibling.nextSibling);
-        // Disable the file input to prevent file upload
-        fileInput.disabled = true;  // Disable the file input
-        this.focus();
+        showBootstrapAlert("confirmPasswordAlert", "Passwords do not match");        // Disable the file input to prevent file upload
+        // fileInput.disabled = true;  
+
+        // this.focus();
         return false;
 
     }
-    if (confirmPass.nextSibling.nextSibling.tagName == "P") {
-        confirmPass.nextSibling.nextSibling.remove();
-
-    }
+    hideBootstrapAlert("confirmPasswordAlert");
     fileInput.disabled = false;
 
 };  
+
+
+
+
+
+
+function validateNotEmpty(inputId, alertId, message) {
+    const input = document.getElementById(inputId);
+
+    input.onkeyup = function () {
+        if (!input.value.trim()) {
+            showBootstrapAlert(alertId, message);
+        } else {
+            hideBootstrapAlert(alertId);
+        }
+    };
+}
+
+function validatePhone(inputId, alertId, message) {
+    const input = document.getElementById(inputId);
+    const phoneRegex = /^01(1|2|5|0)[0-9]{8}$/; // Adjust phone regex as per your needs
+
+    input.onkeyup = function () {
+        if (!input.value.trim()) {
+            showBootstrapAlert(alertId, message);
+        } else if (!phoneRegex.test(input.value)) {
+            showBootstrapAlert(alertId, "Please enter a valid phone number.");
+        } else {
+            hideBootstrapAlert(alertId);
+        }
+    };
+}
+
+
+function validateEmail(inputId, alertId, message) {
+    const input = document.getElementById(inputId);
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/; // Check for @gmail.com domain
+
+    input.onkeyup = function () {
+        if (!input.value.trim()) {
+            showBootstrapAlert(alertId, message);
+        } else if (!emailRegex.test(input.value)) {
+            showBootstrapAlert(alertId, "Please enter a valid Gmail address.");
+        } else {
+            hideBootstrapAlert(alertId);
+        }
+    };
+}
+
+validateNotEmpty("fullName", "fullNameAlert", "Full Name is required");
+validateNotEmpty("phone", "phoneAlert", "Phone number is required");
+validatePhone("phone", "phoneAlert", "Phone number is required");
+validateNotEmpty("whatsappNumber", "whatsappAlert", "WhatsApp number is required");
+validateNotEmpty("address", "addressAlert", "Address is required");
+validateNotEmpty("email", "emailAlert", "Email is required");
+validateEmail("email", "emailAlert", "Email must be a Gmail address");
+
+
+
+// helper functions to show error 
+
+function showBootstrapAlert(id, message) {
+    const alertDiv = document.getElementById(id);
+    if (alertDiv) {
+        alertDiv.textContent = message;
+        alertDiv.classList.remove("d-none");
+    }
+}
+
+function hideBootstrapAlert(id) {
+    const alertDiv = document.getElementById(id);
+    if (alertDiv) {
+        alertDiv.classList.add("d-none");
+    }
+}

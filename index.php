@@ -35,41 +35,59 @@ include 'DB_Ops.php';
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" name="fullName" id="fullName" placeholder="fullName" required>
                                         <label for="fullName">Full Name</label>
+                                        <div id="fullNameAlert" class="alert alert-danger d-none mt-2 p-2"></div>
+
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" name="userName" id="userName" placeholder="username" required>
                                         <label for="username">Username</label>
+                                        <div id="usernameAlert" class="alert alert-danger d-none mt-2 p-2"></div>
+                                        <div id="usernameAlertS" class="alert alert-success d-none mt-2 p-2"></div>
+
                                     </div>
                                     <span id="username_status"></span> <!-- Message area -->
                                     <div class="form-floating mb-3">
                                         <input type="tel" class="form-control" name="phone" id="phone" placeholder="Phone" required>
                                         <label for="phone">Phone</label>
+                                        <div id="phoneAlert" class="alert alert-danger d-none mt-2 p-2"></div>
                                     </div>
                                     <div class="form-floating mb-3 d-flex">
                                         <input type="tel" class="form-control rounded-end-0" name="whatsapp" id="whatsappNumber" placeholder="whatsappNumber" required>
                                         <label for="whatsappNumber">WhatsApp</label>
                                         <button type="button" class="btn btn-outline-dark rounded-start-0 p-0 px-1">Check</button>
                                     </div>
+                                    <div id="whatsappAlert" class="alert alert-danger d-none mt-2 p-2"></div>
+
+
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" name="address" id="address" placeholder="address" required>
                                         <label for="address">Address</label>
+                                    <div id="addressAlert" class="alert alert-danger d-none mt-2 p-2"></div>
+
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" name="email" id="email" placeholder="email" required>
                                         <label for="email">Email</label>
+                                        <div id="emailAlert" class="alert alert-danger d-none mt-2 p-2"></div>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control" name="password" id="password" placeholder="password" required>
                                         <label for="password">Password</label>
+                                        <div id="passwordAlert" class="alert alert-danger d-none mt-2"></div>
+
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
                                         <label for="confirmPassword">Confirm Password</label>
+                                        <div id="confirmPasswordAlert" class="alert alert-danger d-none mt-2"></div>
+
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Upload Image</label>
                                         <input type="file" class="form-control" name="fileToUpload" id="fileInput" required>
                                     </div>
+                              <div id="confirmPasswordAlert" class="alert alert-danger d-none mt-2"></div>
+                              
                                     <button type="submit" class="btn btn-primary w-100 py-2" name="submit">Register</button>
                                 </form>
                             </div>
