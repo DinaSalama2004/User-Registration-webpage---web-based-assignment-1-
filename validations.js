@@ -66,15 +66,21 @@ passlength.style.fontSize = "15px";
 passlength.style.color = "red";
 passlength.style.margin = "0";
 
+const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
+
 password.onblur = function () {
-    if (this.value.length < 8) {
-        password.parentNode.insertBefore(passlength, password.nextSibling.nextSibling);
+    if (!passwordRegex.test(this.value)) {
+        // Show error message
+        if (!password.nextElementSibling || password.nextElementSibling.tagName !== "P") {
+            password.parentNode.insertBefore(passlength, password.nextSibling.nextSibling);
+        }
         this.focus();
         return false;
     }
-    if (password.nextSibling.nextSibling.tagName == "P") {
-        password.nextSibling.nextSibling.remove();
 
+    // Remove error message if valid
+    if (password.nextElementSibling && password.nextElementSibling.tagName === "P") {
+        password.nextElementSibling.remove();
     }
 };
 
