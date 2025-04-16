@@ -68,7 +68,7 @@ include 'DB_Ops.php';
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Upload Image</label>
-                                        <input type="file" class="form-control" name="fileToUpload" required>
+                                        <input type="file" class="form-control" name="fileToUpload" id="fileInput" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 py-2" name="submit">Register</button>
                                 </form>
