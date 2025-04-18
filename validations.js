@@ -263,3 +263,16 @@ viewPasswordBtn.addEventListener("click", function () {
         confirmPass.type = "password";
     }
 })
+
+
+// Get form and success message
+const form = document.getElementById('registrationForm');
+const successMessage = document.getElementById('successMessage');
+
+// When form is submitted
+form.addEventListener('submit', function (event) {
+    event.preventDefault(); // Prevent default form submission (page reload)
+    successMessage.classList.remove('d-none'); // Show success message
+    form.reset(); // This will clear the form
+     form.style.display = 'none'; // If you want to hide the form after success
+});
