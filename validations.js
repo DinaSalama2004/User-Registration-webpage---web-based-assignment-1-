@@ -170,5 +170,18 @@ function errorMsg(element, msg) {
     element.classList.replace("text-success", "text-danger");
     element.innerHTML = msg;
     console.log("hello from error");
-
 }
+
+
+/* view password */
+var viewPasswordBtn = document.getElementById("viewPassword");
+viewPasswordBtn.addEventListener("click", function () {
+    if (password.type == "password" && confirmPass.type == "password") {
+        password.type = "text";
+        confirmPass.type = "text";
+    }
+    else {
+        password.type = "password";
+        confirmPass.type = "password";
+    }
+})

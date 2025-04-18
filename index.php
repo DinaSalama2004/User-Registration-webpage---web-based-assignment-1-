@@ -122,12 +122,19 @@ include 'DB_Ops.php';
                                             <label for="confirmPassword">Confirm Password</label>
                                             <div id="confirmPasswordAlert" class="alert alert-danger d-none mt-2"></div>
                                         </div>
+                                        <div id="confirmPasswordAlert" class="alert alert-danger d-none mt-2"></div>
+
+                                        <div class="mb-3 d-flex align-items-center w-auto">
+                                            <input type="checkbox" id="viewPassword" style="width: 20px; height: 20px">
+                                            <label for="viewPassword" class="ps-2">View Password</label>
+                                        </div>
                                         <div class="mb-3">
                                             <label class="form-label">Upload Image</label>
                                             <input type="file" class="form-control" name="fileToUpload" id="fileInput"
                                                 required>
                                         </div>
-                                        <div id="confirmPasswordAlert" class="alert alert-danger d-none mt-2"></div>
+
+
                                         <button type="submit" class="btn btn-primary w-100 py-2"
                                             name="submit">Register</button>
                                     </form>
