@@ -150,7 +150,6 @@ include 'DB_Ops.php';
         }
     </style>
     <script src="validations.js"></script>
-    <script src="viewPassword.js"></script>
 </body>
 
 </html>

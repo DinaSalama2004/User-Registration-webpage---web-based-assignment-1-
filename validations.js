@@ -112,17 +112,21 @@ confirmPass.onblur = function () {
 var countryPrefix = document.getElementById("countryPrefix");
 var whatsappNumber = document.getElementById('whatsappNumber');
 var checkWhatsappNumberBtn = document.getElementById("checkWhatsappNumberBtn");
-var apiKey = "016594cd32mshadfb3ed6c008eebp17d63bjsnf03b7ec16629";
+var apiKey = "f4d7692d53msh0e8e04966683c30p118e4cjsnd9175f4c94d7";
 var whatsappMsg = document.getElementById("whatsappMsg");
 
-checkWhatsappNumberBtn.addEventListener("click", function () {
+checkWhatsappNumberBtn.addEventListener("click", async function () {
     var whatsappNumberValue = whatsappNumber.value;
     whatsappNumberValue = countryPrefix.value + whatsappNumberValue;
-    if (checkWhatsappNumber(whatsappNumberValue) == true) {
+    console.log(whatsappNumberValue);
+    var check = await checkWhatsappNumber(whatsappNumberValue);
+    if (check === true) {
         successMsg(whatsappMsg, "Valid Whatsapp Number!");
+        console.log("valid");
     }
     else {
         errorMsg(whatsappMsg, "Invalid Whatsapp Number!");
+        console.log("Invalid");
     }
 })
 
@@ -138,10 +142,12 @@ async function checkWhatsappNumber(number) {
             headers: {
                 'Content-Type': 'application/json',
                 'x-rapidapi-host': 'whatsapp-number-validator3.p.rapidapi.com',
-                'x-rapidapi-key': 'c8f257b4f5msh2e0fe7adb65cb0dp1ac6d2jsn565585c65f62'
+                'x-rapidapi-key': 'f4d7692d53msh0e8e04966683c30p118e4cjsnd9175f4c94d7'
             }
         })
         var finalResponse = await response.json();
+        console.log(finalResponse);
+        console.log(finalResponse.status);
         if (finalResponse.status == "valid") {
             return true;
         }
@@ -157,9 +163,12 @@ async function checkWhatsappNumber(number) {
 function successMsg(element, msg) {
     element.classList.replace("text-danger", "text-success");
     element.innerHTML = msg;
+    console.log("hello from success");
 }
 
 function errorMsg(element, msg) {
     element.classList.replace("text-success", "text-danger");
     element.innerHTML = msg;
+    console.log("hello from error");
+
 }
