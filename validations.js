@@ -66,7 +66,7 @@ passlength.style.fontSize = "15px";
 passlength.style.color = "red";
 passlength.style.margin = "0";
 
-const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{8,}$/;
+const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*.])[A-Za-z0-9!@#$%^&*.]{8,}$/;
 
 password.onblur = function () {
     if (!passwordRegex.test(this.value)) {
