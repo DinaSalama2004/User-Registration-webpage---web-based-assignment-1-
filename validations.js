@@ -60,6 +60,7 @@ username.onblur = function () {
     }
 };
 
+//password validation 
 let passlength = document.createElement("P");
 passlength.textContent = "Password must be at least 8 characters long, contain at least one number, and one special character (e.g., @, #, $, etc.).";
 passlength.style.fontSize = "15px";
@@ -84,6 +85,7 @@ password.onblur = function () {
     }
 };
 
+//confirmed password validation
 let confirmed = document.createElement("P");
 confirmed.textContent = "Passwords do not match , try again";
 confirmed.style.fontSize = "15px";
@@ -106,6 +108,82 @@ confirmPass.onblur = function () {
     fileInput.disabled = false;
 
 };
+
+//email validation
+let email = document.getElementById('email'); // Assuming the input id is 'email'
+let emailError = document.createElement("P");
+emailError.textContent = "Please enter a valid email address.";
+emailError.style.fontSize = "15px";
+emailError.style.color = "red";
+emailError.style.margin = "0";
+
+//at least one char in domain , after .
+const emailRegex = /^(?=.*[a-zA-Z])[^\s@]+@[^\s@]*[a-zA-Z][^\s@]*\.[^\s@]*[a-zA-Z][^\s@]*$/;
+
+
+email.onblur = function () {
+    if (!emailRegex.test(this.value)) {
+        if (!email.nextElementSibling || email.nextElementSibling.tagName !== "P") {
+            email.parentNode.insertBefore(emailError, email.nextSibling.nextSibling);
+        }
+        this.focus();
+        return false;
+    }
+    if (email.nextElementSibling && email.nextElementSibling.tagName === "P") {
+        email.nextElementSibling.remove();
+    }
+};
+
+//phone number validation 
+let phoneNumber = document.getElementById('phone'); // Assuming the input id is 'phoneNumber'
+let phoneError = document.createElement("P");
+phoneError.textContent = "Please enter a valid phone number (9 to 11 digits, numbers only, no spaces or special characters).";
+phoneError.style.fontSize = "15px";
+phoneError.style.color = "red";
+phoneError.style.margin = "0";
+
+const phoneRegex = /^[0-9]{9,11}$/;
+
+phoneNumber.onblur = function () {
+    if (!phoneRegex.test(this.value)) {
+        if (!phoneNumber.nextElementSibling || phoneNumber.nextElementSibling.tagName !== "P") {
+            phoneNumber.parentNode.insertBefore(phoneError, phoneNumber.nextSibling.nextSibling);
+        }
+        this.focus();
+        return false;
+    }
+    if (phoneNumber.nextElementSibling && phoneNumber.nextElementSibling.tagName === "P") {
+        phoneNumber.nextElementSibling.remove();
+    }
+};
+
+//full name validation 
+const fullNameInput = document.getElementById("fullName");
+// Create <p> element for Full Name validation
+let fullNameError = document.createElement("p");
+fullNameError.textContent = "Full Name must contain only letters and spaces (at least 3 characters).";
+fullNameError.style.fontSize = "15px";
+fullNameError.style.color = "red";
+fullNameError.style.margin = "0";
+
+fullNameInput.onblur = function () {
+    const regex = /^[a-zA-Z\s]{3,50}$/;
+
+    if (!regex.test(this.value.trim())) {
+        // Insert the <p> message if not already inserted
+        if (!fullNameInput.nextElementSibling || fullNameInput.nextElementSibling.tagName !== "P") {
+            fullNameInput.parentNode.insertBefore(fullNameError, fullNameInput.nextSibling.nextSibling);
+        }
+        this.focus();
+        return false;
+    }
+
+    // Remove <p> message if full name is valid
+    if (fullNameInput.nextElementSibling && fullNameInput.nextElementSibling.tagName === "P") {
+        fullNameInput.nextElementSibling.remove();
+    }
+};
+
 
 
 /* whatsapp number validation */
