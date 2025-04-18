@@ -138,6 +138,7 @@ include 'DB_Ops.php';
                                         <button type="submit" class="btn btn-primary w-100 py-2"
                                             name="submit">Register</button>
                                     </form>
+                                    <div id="successMessage" class="alert alert-success d-none mt-3" role="alert">Registration successful! Welcome aboard.</div>
                                 </div>
                             </div>
                         </div>
