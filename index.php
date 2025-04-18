@@ -56,7 +56,7 @@ include 'DB_Ops.php';
                                         <span id="username_status"></span> <!-- Message area -->
                                         <div class="form-floating mb-3">
                                             <input type="tel" class="form-control" name="phone" id="phone"
-                                                placeholder="Phone" required>
+                                                placeholder="Phone (9 to 11) digits " required>
                                             <label for="phone">Phone</label>
                                             <div id="phoneAlert" class="alert alert-danger d-none mt-2 p-2"></div>
                                         </div>
