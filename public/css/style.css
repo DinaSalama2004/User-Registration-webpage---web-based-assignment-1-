@@ -7,3 +7,15 @@
 .phone-prefix:focus {
     box-shadow: none;
 }
+
+[dir="rtl"] .btn-group {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .text-md-start {
+    text-align: right !important;
+}
+
+[dir="rtl"] .text-md-end {
+    text-align: left !important;
+}

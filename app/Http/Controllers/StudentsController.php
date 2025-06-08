@@ -16,7 +16,7 @@ class StudentsController extends Controller
     public function index()
     {
         //
-        
+
     }
 
     /**
@@ -40,7 +40,7 @@ class StudentsController extends Controller
         //validations (@,$,!,%,*,#,?,&,.)
         $request->validate([
             'full_name' => 'required|string',
-            'user_name' => 'required|unique:students,user_name|min:3',
+            'user_name' => 'required|unique:students,user_name',
             'phone' => 'required',
             'whatsapp' => 'required',
             'address' => 'required',
@@ -77,7 +77,7 @@ class StudentsController extends Controller
 
         //dd('User saved!', $user);
 
-        return redirect()->back()->with('success', 'Registration successful!');
+        return redirect()->back()->with('success', __('messages.registration_successful'));
     }
 
     /**
@@ -113,12 +113,27 @@ class StudentsController extends Controller
     }
 
 
+    // Check username availability
+    public function checkUsername(Request $request)
+    {
+        $username = $request->input('username');
+        $isTaken = Students::where('user_name', $username)->exists();
 
+        return response()->json([
+            'status' => $isTaken ? 'taken' : 'available',
+            'message' => $isTaken ? 'The username has already been taken.' : 'Username is available'
+        ]);
+    }
 
-public function checkUsername(Request $request){
-$username = $request->input('username');  //The 'username' refers to the name of the POST parameter being sent from the AJAX request.
-$isTaken = Students::where('user_name', $username)->exists();
-return response($isTaken ? 'taken' : 'available');
-}
+    // Check email availability (NEW METHOD)
+    public function checkEmail(Request $request)
+    {
+        $email = $request->input('email');
+        $isTaken = Students::where('email', $email)->exists();
 
+        return response()->json([
+            'status' => $isTaken ? 'taken' : 'available',
+            'message' => $isTaken ? 'The email has already been taken.' : 'Email is available'
+        ]);
+    }
 }

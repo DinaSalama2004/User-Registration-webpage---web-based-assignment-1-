@@ -1,11 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\DB; // ✅ Add this line to import DB
 
 
 use App\Http\Controllers\StudentsController;
-use App\Models\Students;
 use Illuminate\Support\Facades\Route;
+
+Route::get('lang/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'ar'])) {
+        session(['locale' => $locale]);
+    }
+    return redirect()->back();
+})->name('lang.switch');
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +23,9 @@ Route::get('/register', [StudentsController::class, 'create'])->name('register')
 Route::post('/register', [StudentsController::class, 'store'])->name('register.store');
 
 Route::post('/check-username', [StudentsController::class, 'checkUsername'])->name('check.username');
+
+// Add this route alongside your existing routes
+Route::post('/check-email', [StudentsController::class, 'checkEmail']);
 
 
 /*Route::get('/test-insert', function () {
